@@ -1,5 +1,7 @@
 package cn.doit.dynamice_rule.pojo;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,8 +15,8 @@ import java.util.Map;
  * @Description:    用于封装日志属性,方便使用Json工具进行toJson
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class LogBean {
 
@@ -36,6 +38,5 @@ public class LogBean {
     private Long   timeStamp;
     private String eventId;
     private Map<String,String> properties;
-
 
 }

@@ -76,6 +76,15 @@ public class ActionLogGen {
                 @Override
                 public void run() {
 
+                    Properties pro = new Properties();
+                    pro.setProperty("bootstrap.servers","tianxiang01:9092,tianxiang02:9092,tianxiang03:9092");
+                    pro.put("acks","all");// acks=0 配置适用于实现非常高的吞吐量, acks=all 这是最安全模式
+                    pro.put("batch.size",1024);//发送到同一个partition的消息会被先存储在batch中,该参数指定一个batch可以使用的内存大小,单位是byte,不一定需要等到batch满了才发送. 默认是 16384=16KB
+                    pro.put("linger.ms",1);//生产者在发送消息前等待linger.ms.从而等待更多的消息加入batch中,如果batch被填满就或者linger.ms达到上限,就把batch中的消息发送出去.当linger.ms大于0时,延时性会增加,但是会提高吞吐量,因为会减少消息发送频率
+                    pro.put("buffer.memory",33554432);//32MB.
+                    pro.put("key.serializer","org.apache.kafka.common.serialization.StringSerializer");
+                    pro.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
+
                     KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(pro);
 
                     while (true){

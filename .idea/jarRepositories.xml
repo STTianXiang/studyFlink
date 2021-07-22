@@ -22,6 +22,11 @@
       <option name="url" value="http://maven.aliyun.com/nexus/content/groups/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="hdp" />
+      <option name="name" value="hdp" />
+      <option name="url" value="https://repo.hortonworks.com/content/repositories/releases/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="msrep" />
       <option name="name" value="msxf repository" />
       <option name="url" value="http://172.30.37.86:8086/repository/maven-public/" />
