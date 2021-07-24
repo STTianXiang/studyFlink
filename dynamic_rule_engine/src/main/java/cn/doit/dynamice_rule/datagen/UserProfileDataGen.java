@@ -36,26 +36,30 @@ public class UserProfileDataGen {
 
         Table hbaseTable = conn.getTable(table);
 
+        ArrayList<Put> puts = new ArrayList<>();
+
         for (int i = 1;i<=100000;i++) {  //生成10万个用户id
 
-            ArrayList<Put> puts = new ArrayList<>();
-
-            for (int p = 1; p <= 50; p++) {  //每生成50条数据,就塞入一个List中.然后一起写入Hbase
+           for (int p = 1; p <= 50; p++) {  //每生成50条数据,就塞入一个List中.然后一起写入Hbase
 
                 String deviceId = StringUtils.leftPad(i + "", 6, "0");
 
                 Put put = new Put(Bytes.toBytes(deviceId));
 
                 for (int j = 1; j <= 1000; j++) { //生成每个用户的1000个画像指标
-                    String key = "k" + j;
+                    String key = "tag" + j;
                     String value = "v" + RandomUtils.nextInt(1, 1000);
                     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes(key), Bytes.toBytes(value));
 
                 }
+                //将这一条画像数据,添加到list中
                 puts.add(put);
             }
-            hbaseTable.put(puts);
-            puts.clear();
+           //积攒100条数据就提交一次
+           if (puts.size()==100){
+               hbaseTable.put(puts);
+               puts.clear();
+           }
         }
         conn.close();
     }

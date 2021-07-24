@@ -14,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -106,7 +107,7 @@ public class ActionLogGen {
                         logBean.setOsVersion("10.6");//OS版本
                         logBean.setReleaseChannel("APPStroe");//发布渠道
                         logBean.setResolution("2048*1024");//分辨率
-                        logBean.setEventId(RandomStringUtils.randomAlphabetic(1));//事件类型,randomAlphabetic:随机生成一个字母
+                        logBean.setEventId(RandomStringUtils.randomAlphabetic(1).toUpperCase());//事件类型,randomAlphabetic:随机生成一个字母
 
 
                         HashMap<String, String> properties = new HashMap<String, String>();
@@ -139,7 +140,7 @@ public class ActionLogGen {
             kafkaProducer.send(producerRecord);*/
 
                         //验证数据是否正确.
-                        System.out.println(log);
+                        //System.out.println(log);
 
                         ProducerRecord<String, String> producerRecord = new ProducerRecord<String, String>("test", log);
                         kafkaProducer.send(producerRecord);
