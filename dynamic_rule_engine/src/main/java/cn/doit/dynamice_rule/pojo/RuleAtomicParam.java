@@ -26,5 +26,6 @@ public class RuleAtomicParam implements Serializable {
     private int cnts;  //事件的阈值要求
     private long rangeStart; //要求事件发生时间段起始
     private long rangeEnd; //要求事件发生时间段结束
+    private int realCnts; // version 1.1 用于记录查询服务所返回的次数查询值
 
 }

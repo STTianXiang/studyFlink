@@ -37,6 +37,8 @@ public class RuleParam implements Serializable {
     //如果我也像行为次数一样塞到 List<RuleAtomicParams> 里面去,其实就是每个行为都得塞..
     // 所以就塞到这里的外层
 
-    //  用于记录查询服务所返回的序列中匹配的最大步骤号
+    // version 1.1 用于记录查询服务所返回的序列中匹配的最大步骤号
     private int userActionSequenceQueriedMaxStep;//比如所我要求依次完成 A->B->C 三个事件.那么我最大步骤是 3
+    /** 上面是次数条件是回写到了 RuleAtomicParam 里面  但是如果我的次序也回写到 RuleAtomicParam 里面就会有冗余
+     *    因为RuleAtomicParam里面是按照eventId 也就是事件类型为粒度, 而我的次序只是回写他完成到了第几步.没必要每个事件都写上一个最大步骤号*/
 }
