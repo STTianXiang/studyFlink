@@ -3,6 +3,7 @@ package cn.doit.dynamice_rule.service;
 import cn.doit.dynamice_rule.pojo.LogBean;
 import cn.doit.dynamice_rule.pojo.RuleAtomicParam;
 import cn.doit.dynamice_rule.pojo.RuleParam;
+import cn.doit.dynamice_rule.tools.RuleCalcUtil;
 import org.apache.flink.api.common.state.ListState;
 
 import java.util.HashMap;
@@ -59,7 +60,7 @@ public class UserActionCountQueryServiceStateImpl implements UserActionCountQuer
         for (LogBean logBean : beansIterable) {
             for (RuleAtomicParam userActionCountParam : userActionCountParams) {
                 //判断当前logbean 和 当前规则原子条件userActionCountParam 是否一致.
-                boolean isMatch = eventBeanMatchActionParam(logBean, userActionCountParam);
+                boolean isMatch = RuleCalcUtil.eventBeanMatchActionParam(logBean, userActionCountParam);
                 //如果一致则次数+1
                 if (isMatch){
                     userActionCountParam.setRealCnts(userActionCountParam.getRealCnts()+1);
@@ -68,8 +69,9 @@ public class UserActionCountQueryServiceStateImpl implements UserActionCountQuer
         }
     }
 
+    // version 1.1中因为查询次序服务也需要这个方法,所以把类似这种具有公共能力的方法放入 tools 中
     //内部工具方法:用于判断一个事件和一个规则中的原子条件是否一致
-    private boolean eventBeanMatchActionParam(LogBean eventBean,RuleAtomicParam eventParam){
+    /*private boolean eventBeanMatchActionParam(LogBean eventBean,RuleAtomicParam eventParam){
         //参数对象 和 事件对象 是否符合条件
         if (eventBean.getEventId().equals(eventParam.getEventId())){
             //如果传入的一个事件的事件id与参数中的事件id相同,就进行属性判断
@@ -86,5 +88,5 @@ public class UserActionCountQueryServiceStateImpl implements UserActionCountQuer
             return true;
         }
         return false;
-    }
+    }*/
 }
