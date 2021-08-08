@@ -21,6 +21,8 @@ import java.util.List;
 public class RuleParam implements Serializable {
     //规则整体封装实体
 
+    private String ruleId;
+
     //  规则中的触发条件
     private RuleAtomicParam triggerParam;
 

@@ -1,0 +1,1 @@
+pojo 为对象(Bean)模块,其中有解析Kafka中Json字符串后的LogBean.也有返回时候的ResultBean

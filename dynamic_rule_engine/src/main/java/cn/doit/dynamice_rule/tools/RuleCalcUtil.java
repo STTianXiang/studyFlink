@@ -33,5 +33,11 @@ public class RuleCalcUtil {
         return false;
     }
 
+    public static boolean eventBeanMatchActionParam(LogBean enventBean,RuleAtomicParam eventParam, boolean neeTimeCompare){
+
+
+
+        return false;
+    }
 
 }
