@@ -28,7 +28,7 @@ public class RuleEngineV2 {
 
         try {
             //添加一个Source
-            logStream = env.addSource(SourceUtilsFunctions.getKafkaSource(""));
+            logStream = env.addSource(SourceUtilsFunctions.getKafkaSource("test"));
         } catch (Exception e) {
             e.printStackTrace();
             TimeUnit.SECONDS.sleep(10);

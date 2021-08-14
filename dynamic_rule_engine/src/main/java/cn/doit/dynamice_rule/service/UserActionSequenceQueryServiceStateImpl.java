@@ -75,4 +75,29 @@ public class UserActionSequenceQueryServiceStateImpl implements UserActionSequen
         }
         return maxStep;
     }
+
+    /***
+     *
+     * @param userActionSequenceParams
+     * @param events
+     * @return   queryActionSequnceHelper 方法的优化
+     *  上面的方法是双层for循环.. 通过拿规则去和事件进行比较..
+     *      可以改进为  单层for循环.. 拿事件去和规则进行比较
+     *    详情可查看设计图模块
+     */
+    public int queryActionSequnceHelper(List<RuleAtomicParam> userActionSequenceParams,Iterable<LogBean> events){
+
+            int maxStep = 0;   //定义规则条件的索引
+
+        for (LogBean event : events) {
+            if (RuleCalcUtil.eventBeanMatchActionParam(event,userActionSequenceParams.get(maxStep))){
+                maxStep++;
+            }
+            if (maxStep == userActionSequenceParams.size()) break;
+        }
+
+        System.out.println("步骤匹配计算完成: 查询到的最大步骤号为: "+maxStep+",条件中的步骤数为: "+userActionSequenceParams.size());
+
+        return maxStep;
+    }
 }
