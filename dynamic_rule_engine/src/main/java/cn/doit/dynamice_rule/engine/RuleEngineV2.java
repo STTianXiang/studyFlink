@@ -24,7 +24,7 @@ public class RuleEngineV2 {
 
         //开启Flink本地界面模式  默认是 主机名(IP):8081
         StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(new Configuration());
-        DataStreamSource<String> logStream = null;
+        DataStreamSource<String> logStream;
 
         try {
             //添加一个Source
